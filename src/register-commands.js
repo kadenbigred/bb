@@ -11,7 +11,7 @@ const commands = [
     },
 ];
 
-const rest = new REST({ version: '10' }).setToken('MTA5NTc1MjYxMzU0NDM0OTgxNg.GNlJKU.n_BS-OpSX8rZVnEfQSmuddUr9YibVw-TjRhI5U');
+const rest = new REST({ version: '10' }).setToken(dcBotToken);
 
 (async () =>{
     try {
