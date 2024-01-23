@@ -1,5 +1,5 @@
 const {Client, IntentsBitField, VoiceChannel} = require('discord.js');
-const keep_alive = require('./keep_alive.js')
+// const keep_alive = require('./keep_alive.js')
 
 const client = new Client({
     intents: [
