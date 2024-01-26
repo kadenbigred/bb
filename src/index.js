@@ -3,7 +3,6 @@ const SmartApp = require('@smartthings/smartapp')
 //smartthings api token
 const accessToken = 'process.env.smartthingsToken';
 const apiUrl = 'https://auth-global.api.smartthings.com';
-const keep_alive = require('./keep_alive.js')
 const imageStorage = require('./images.js')
 const { jerboaImages, caracalImages, hyenaImages, foxImages, hogImages } = require('./images.js');
 
@@ -144,6 +143,10 @@ function responses(message) {
 
     if (message.content.toLowerCase() == prefix + ' help') {
         return prefix + ' hi, ' + prefix + ' diceroll, ' + prefix + ' hog, ' + prefix + ' caracal, ' + prefix + ' baby hyena, ' + prefix + ' jerboa, ' + prefix + ' fox'
+    }
+
+    if (message.content.toLowerCase() == prefix + ' help mc' || message.content.toLowerCase() == 'mc help') {
+        message.channel.send(`Public Commands: \nmc start - starts the minecraft server\nmc status - returns the status of the minecraft server \n\nRequires Perms: \nmc stop - stops the minecraft server (DOES NOT WORK ON SERVER CRASH)\nmc stop crash - force stops the minecraft server (ONLY USE THIS ON CRASHES)\n\nnote: all commands only work in the "minecraft" channel`);
     }
 
     if (message.content.toLowerCase() == prefix + ' do the thug shaker' || message.content.toLowerCase() == prefix + ' thug shake') {
