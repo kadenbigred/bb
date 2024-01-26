@@ -1,5 +1,5 @@
 const { Client, IntentsBitField, VoiceChannel } = require('discord.js');
-const SmartApp = require('@smartthings/smartapp')
+//const SmartApp = require('@smartthings/smartapp')
 //smartthings api token
 const accessToken = 'process.env.smartthingsToken';
 const apiUrl = 'https://auth-global.api.smartthings.com';
