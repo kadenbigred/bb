@@ -1,7 +1,7 @@
 const { Client, IntentsBitField, VoiceChannel } = require('discord.js');
 const SmartApp = require('@smartthings/smartapp')
 //smartthings api token
-const accessToken = 'process.env.smartthingsToken';
+const accessToken = process.env.smartthingsToken;
 const apiUrl = 'https://auth-global.api.smartthings.com';
 const imageStorage = require('./images.js')
 const { jerboaImages, caracalImages, hyenaImages, foxImages, hogImages } = require('./images.js');
@@ -17,11 +17,13 @@ const client = new Client({
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildPresences,
     ]
 });
 
 client.on('ready', (c) => {
     console.log(`${c.user.username} is online`);
+    checkUserStatus('1167910738984190004', '1095022464557383690');
 })
 
 client.on('interactionCreate', (interaction) => {
@@ -31,6 +33,21 @@ client.on('interactionCreate', (interaction) => {
     interaction.reply(slashResponse)
 
 })
+
+client.on('presenceUpdate', (oldPresence, newPresence) => {
+    // Check if the presence update is for the specific user you are monitoring
+    if (newPresence.userId === '1167910738984190004') {
+        // This checks if the user has changed status
+        if (!oldPresence || newPresence.status !== oldPresence.status) {
+            console.log(`${newPresence.user.tag} is now ${newPresence.status}`);
+            if(serverStatus == 'on' && newPresence.status == 'offline'){
+                client.channels.cache.get('1167909404910297098').send('Server crash detected')
+                stopServer()
+                setTimeout(startServer, 5000);
+            }
+        }
+    }
+});
 
 
 client.on('messageCreate', (message) => {
@@ -362,6 +379,80 @@ function responses(message) {
     }
 
 }
+
+// check for bot online status
+async function checkUserStatus(userId, guildId) {
+    const guild = client.guilds.cache.get(guildId);
+    if (!guild) return console.log('Guild not found!');
+
+    try {
+        const member = await guild.members.fetch(userId);
+        console.log(`${member.user.tag} is currently ${member.presence ? member.presence.status : 'offline'}`);
+    } catch (error) {
+        console.error('Failed to fetch member:', error);
+    }
+}
+
+function stopServer(){
+    const url = `https://api.smartthings.com/v1/devices/c430e045-684d-4089-8598-54d58cb508d1/commands`;
+            const commandBody = {
+                commands: [
+                    {
+                        component: 'main',
+                        capability: 'switch',
+                        command: 'off',
+                        arguments: [],
+                    },
+                ],
+            };
+
+            axios.post(url, commandBody, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    console.log('Device turned off:', response.data);
+                    client.channels.cache.get('1167909404910297098').send('Server powered off successfully. Run "mc start" to start it back up.')
+                    serverStatus = 'off'
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+}
+
+function startServer(){
+    client.channels.cache.get('1167909404910297098').send('Starting...')
+            const url = `https://api.smartthings.com/v1/devices/c430e045-684d-4089-8598-54d58cb508d1/commands`;
+            const commandBody = {
+                commands: [
+                    {
+                        component: 'main',
+                        capability: 'switch',
+                        command: 'on',
+                        arguments: [],
+                    },
+                ],
+            };
+
+            axios.post(url, commandBody, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    console.log('Device turned on:', response.data);
+                    message.channel.send('Server successfully turned on, please wait a few minutes while the server launches')
+                    client.channels.cache.get('1167909404910297098').send('Server successfully turned on, please wait a few minutes while the server launches')
+                    serverStatus = 'starting'
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+}
+
 
 // RAND NUM FUNCTION
 function randNumFromInt(min, max) {
