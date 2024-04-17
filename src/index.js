@@ -1,4 +1,5 @@
 const { Client, IntentsBitField, VoiceChannel } = require('discord.js');
+const keep_alive = require('./keep_alive.js')
 const SmartApp = require('@smartthings/smartapp')
 //smartthings api token
 const accessToken = process.env.smartthingsToken;
