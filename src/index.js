@@ -156,7 +156,7 @@ function slashCommandResponses(slashCommand) {
 // ALL BOT TEXT RESPONSES
 function responses(message) {
 
-    var prefix = 'vv';
+    var prefix = 'bb';
 
 
 
