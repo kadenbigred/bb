@@ -1,15 +1,18 @@
+
+require('dotenv').config();
 const { Client, IntentsBitField, VoiceChannel } = require('discord.js');
-const keep_alive = require('./keep_alive.js')
+
 const SmartApp = require('@smartthings/smartapp')
 //smartthings api token
 const accessToken = process.env.smartthingsToken;
 const apiUrl = 'https://auth-global.api.smartthings.com';
-const imageStorage = require('./images.js')
-const { jerboaImages, caracalImages, hyenaImages, foxImages, hogImages } = require('./images.js');
-
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const imageStorage = require('./images.js');
+const { jerboaImages, caracalImages, hyenaImages, foxImages, hogImages, seaAngelImages, birdImages } = require('./images.js');
+//const currency = require('./schemas/Currency');
 var serverStatus = 'off';
 var waitingForSave = false;
-
+var controllingBot = false;
 const axios = require('axios');
 
 const client = new Client({
@@ -22,10 +25,36 @@ const client = new Client({
     ]
 });
 
+
+//connect to user database
+const mongoClient = new MongoClient(process.env.mongoPassword, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+
+(async () => {
+    try{
+        await mongoClient.db("admin").command({ ping: 1 });
+        console.log("Connected to database")
+
+    } catch(error){
+        console.log(`Error:  ${error}`);
+    }
+    
+})();
+
+
 client.on('ready', (c) => {
     console.log(`${c.user.username} is online`);
     checkUserStatus('1167910738984190004', '1095022464557383690');
 })
+
+
+
 
 client.on('interactionCreate', (interaction) => {
     if (!interaction.isChatInputCommand()) return;
@@ -104,6 +133,8 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
   });
 ;
 
+
+// slash commands
 function slashCommandResponses(slashCommand) {
     if (slashCommand.commandName == 'hog') {
         var hogChoice = randNumFromInt(0, hogImages.length + 1);
@@ -111,9 +142,24 @@ function slashCommandResponses(slashCommand) {
     }
 }
 
+
+
+
+
+
+
+
+
+
 // ALL BOT TEXT RESPONSES
 function responses(message) {
-    var prefix = 'bb';
+
+    var prefix = 'vv';
+
+
+
+
+    // all image commands
 
     if (message.content.toLowerCase() == prefix + ' hi' || message.content.toLowerCase() == prefix + ' hello') {
         return 'gnorp gnarp';
@@ -149,6 +195,33 @@ function responses(message) {
         return foxImages[foxChoice];
     }
 
+    if (message.content.toLowerCase() == prefix + ' bird') {
+        var birdChoice = randNumFromInt(0, birdImages.length + 1);
+        return birdImages[birdChoice];
+    }
+
+    if (message.content.toLowerCase() == prefix + ' sea angel') {
+        var seaAngelChoice = randNumFromInt(0, seaAngelImages.length + 1);
+        return seaAngelImages[seaAngelChoice];
+    }
+
+
+
+
+
+
+    //help command
+
+    if (message.content.toLowerCase() == prefix + ' help') {
+        return prefix + ' hi, ' + prefix + ' diceroll, ' + prefix + ' hog, ' + prefix + ' caracal, ' + prefix + ' baby hyena, ' + prefix + ' jerboa, ' + prefix + ' fox, ' + prefix + ' sea angel, ' + prefix + ' bird' 
+    }
+
+
+
+
+
+    // easter egg commands
+
     if (message.content.toLowerCase() == prefix + ' show me play dough kenny') {
         var showKenny = randNumFromInt(1, 1000);
         if (showKenny == 999) {
@@ -158,13 +231,8 @@ function responses(message) {
         }
     }
 
-
-    if (message.content.toLowerCase() == prefix + ' help') {
-        return prefix + ' hi, ' + prefix + ' diceroll, ' + prefix + ' hog, ' + prefix + ' caracal, ' + prefix + ' baby hyena, ' + prefix + ' jerboa, ' + prefix + ' fox'
-    }
-
-    if (message.content.toLowerCase() == prefix + ' help mc' || message.content.toLowerCase() == 'mc help') {
-        message.channel.send(`Public Commands: \nmc start - starts the minecraft server\nmc status - returns the status of the minecraft server \n\nRequires Perms: \nmc stop - stops the minecraft server (DOES NOT WORK ON SERVER CRASH)\nmc stop crash - force stops the minecraft server (ONLY USE THIS ON CRASHES)\n\nnote: all commands only work in the "minecraft" channel`);
+    if (message.content.toLowerCase() == '<@&1124527413280387092>' || message.content.toLowerCase() == '<@579143676677062676>') {
+        return '<@&1124527413280387092>'
     }
 
     if (message.content.toLowerCase() == prefix + ' do the thug shaker' || message.content.toLowerCase() == prefix + ' thug shake') {
@@ -175,8 +243,8 @@ function responses(message) {
         return 'https://media.discordapp.net/attachments/843313803391402028/1081792032185524356/caption.gif'
     }
 
-    if (message.content.toLowerCase() == '<@&1124527413280387092>' || message.content.toLowerCase() == '<@579143676677062676>') {
-        return '<@&1124527413280387092>'
+    if (message.content.toLowerCase() == prefix + ' swaggin') {
+        return 'https://cdn.discordapp.com/attachments/1095022465199120466/1231450786551037962/halloween_blunt.png'
     }
 
     if (message.content.toLowerCase() == 'bed') {
@@ -188,6 +256,41 @@ function responses(message) {
         }
     }
 
+    if (message.content.toLowerCase().slice(0, 6) == prefix + ' say') {
+        if (message.author.id == '569736680878374912') {
+            var channelToSend = message.content.toLowerCase().slice(7, 26);
+            var messageToSend = message.content.slice(27)
+            message.delete()
+            try{
+                client.channels.cache.get(channelToSend).send(messageToSend)
+            }catch{
+                message.channel.send('invalid channel')
+            }
+            
+        }
+    }
+
+    //control cmd
+    if (controllingBot && message.author.id == '569736680878374912'){
+        if(message.content.toLowerCase() != prefix + ' control'){
+            message.delete()
+            message.channel.send(message.content)
+        }
+    }
+
+    if (message.content.toLowerCase() == prefix + ' control') {
+        if (message.author.id == '569736680878374912' && !controllingBot) {
+            message.delete()
+            controllingBot = true;
+            console.log('controlling true')
+        }else if(message.author.id == '569736680878374912' && controllingBot){
+            message.delete()
+            controllingBot = false;
+            console.log('controlling FALSE')
+        }
+    }
+    // also control cmd ^
+    
 
     if (message.content.toLowerCase() == prefix + ' permtest' || message.content.toLowerCase() == prefix + 'you seeing this shit bro') {
         if (message.author.id == '569736680878374912') {
@@ -196,6 +299,16 @@ function responses(message) {
             return 'no fuck you'
         }
     }
+
+    
+
+
+    //minecraft commands
+
+    if (message.content.toLowerCase() == prefix + ' help mc' || message.content.toLowerCase() == 'mc help') {
+        message.channel.send(`Public Commands: \nmc start - starts the minecraft server\nmc status - returns the status of the minecraft server \n\nRequires Perms: \nmc stop - stops the minecraft server (DOES NOT WORK ON SERVER CRASH)\nmc stop crash - force stops the minecraft server (ONLY USE THIS ON CRASHES)\n\nnote: all commands only work in the "minecraft" channel`);
+    }
+
 
     if (message.content.toLowerCase() == 'mc start') {
         
@@ -242,6 +355,7 @@ function responses(message) {
         }
 
     }
+
 
     if (message.content.toLowerCase() == 'mc stop') {
         
@@ -303,6 +417,14 @@ function responses(message) {
         message.channel.send('The server is currently: ' + serverStatus)
     }
 
+    if (message.content.toLowerCase().slice(0, 13) == 'mc set status' && message.author.id == '569736680878374912') {
+        serverStatus = message.content.slice(14);
+        console.log('set server status to ' + serverStatus);
+    }
+
+
+
+    //respond to server statuses
     if (message.content.toString().indexOf('Server has started') != -1 && message.author.id == '1167910738984190004') {
         message.channel.send('Server started successfully')
         serverStatus = 'on'
@@ -381,7 +503,7 @@ function responses(message) {
 
 }
 
-// check for bot online status
+// check for minecraft bot online status
 async function checkUserStatus(userId, guildId) {
     const guild = client.guilds.cache.get(guildId);
     if (!guild) return console.log('Guild not found!');
