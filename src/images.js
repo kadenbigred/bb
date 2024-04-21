@@ -10,6 +10,8 @@ var jerboaImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1
     'https://cdn.discordapp.com/attachments/693513623787536384/1196659232297189477/wired_absurd-creatures-this-tiny-adorable-critter-is-half-kangaroo-half-velociraptor.jpg?ex=65b86ec1&is=65a5f9c1&hm=da219084a1fffea3c76f9a841146acff5000efed6e0b56bfda6398f8879341c2&', 
     'https://cdn.discordapp.com/attachments/693513623787536384/1196659272206000150/digests_50645_digest-50645.png.jpg?ex=65b86ecb&is=65a5f9cb&hm=192d799e3267d8329254198d59fae1262aeda0fc66b302afcbca3ea5d59b5505&']
 
+
+
     var caracalImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1095910458248134737/FGDIzfAVcAIpqNu.jpg', 
     'https://cdn.discordapp.com/attachments/693513623787536384/1095910491324420146/FF8RDr3VUAIkxMo.jpg', 
     'https://cdn.discordapp.com/attachments/693513623787536384/1095910518071513199/FF5PaAXUcAA0TqN.jpg', 
@@ -23,12 +25,16 @@ var jerboaImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1
     'https://cdn.discordapp.com/attachments/693513623787536384/1095910755540402237/Sassy-Caracal-2016.webp', 
     'https://cdn.discordapp.com/attachments/693513623787536384/1095910815883853905/81297d55-d18a-457e-9b88-bf603f7605d0-cats-6-1.webp']
 
+
+
     var hyenaImages = ['https://cdn.discordapp.com/attachments/1095022465199120466/1196656309618086069/Z.png', 
     'https://cdn.discordapp.com/attachments/1095022465199120466/1196656365570109450/ZVMPI4WGMYI6TCHRIBWI6S7HAY.png', 
     'https://cdn.discordapp.com/attachments/1095022465199120466/1196656398998700083/tiny-baby-spotted-hyena-cub-600nw-1744105886.png', 
     'https://cdn.discordapp.com/attachments/1095022465199120466/1196656453965062205/hgzkyg7g4yf21.png', 
     'https://cdn.discordapp.com/attachments/1095022465199120466/1196656453965062205/hgzkyg7g4yf21.png', 
     'https://cdn.discordapp.com/attachments/1095022465199120466/1196656512739856395/baby-hyena.png']
+
+
 
     var hogImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1095904363177844806/RedRiverHog_0084.webp', 
     'https://media.discordapp.net/attachments/693513623787536384/1095904426432139315/image33.jpeg?width=824&height=676', 
@@ -37,7 +43,17 @@ var jerboaImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1
     'https://media.discordapp.net/attachments/693513623787536384/1095908781013074100/RedRiverHog02-1.jpg', 
     'https://cdn.discordapp.com/attachments/693513623787536384/1095908852156866602/red-river-hog-dsc_7903.jpg', 
     'https://cdn.discordapp.com/attachments/693513623787536384/1095908899418292265/RedRiverHog.jpg', 
-    'https://cdn.discordapp.com/attachments/693513623787536384/1095908937867468840/red-river-hog.jpg']
+    'https://cdn.discordapp.com/attachments/693513623787536384/1095908937867468840/red-river-hog.jpg',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449354074849310/image.png',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449413424254986/image.png',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449482160508949/image.png',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449554348539914/image.png',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449609784528916/6887959199_7fc6b04e34_o-crop.jpg',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449634057224226/feral_swine_with_young-400x267.png',
+    'https://cdn.discordapp.com/attachments/693513623787536384/1231449693985181749/bush-pig-2.jpg'
+    ]
+
+
 
     var foxImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1199482373516034098/FFJKon4WUAUXBL9.jpg',
     'https://cdn.discordapp.com/attachments/693513623787536384/1199482936584577126/20240123_073531.jpg',
@@ -84,10 +100,56 @@ var jerboaImages = ['https://cdn.discordapp.com/attachments/693513623787536384/1
     'https://cdn.discordapp.com/attachments/693513623787536384/1199499815113994240/0arih25bvr2b1.webp']
     
 
+    var birdImages = [
+        //pigeons
+        'https://media.discordapp.net/attachments/693513623787536384/1231452108356845568/308065631-480px.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452193719320677/Pest_900x906_Pigeon_3.webp',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452446807818250/c94e3d74f9a8a28baa3f77ae1b0d6a40.png',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452488347947008/GettyImages-1127204610-600x400.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452539711389790/308074331-480px.jpg',
+
+        //falcons
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452652483776613/istock-172384962.webp',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452688617832457/640px-Brown-Falcon-Vic-3.1.2008.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452740446847037/africanpygmyfalcon_gallery2.webp',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231452775506907187/1632763800-peregrine-falcon-webexport.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453006197817385/peregrine-falcon.jpg',
+
+        //eagles
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453076125384844/Bald_eagle_about_to_fly_in_Alaska_2016.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453102335594497/09.22_bald-eagle_Issue.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453137445978183/Bald-eagle.webp',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453183931449354/MG_7021-176-scaled.jpg',
+
+        //seagulls
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453242089668668/methode_times_prod_web_bin_96d78a54-ef33-11e8-8888-d940336e3709.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231453315204780052/istockphoto-157195802-612x612.jpg',
+
+        //other
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231455678141567056/GLVhIpkbYAAQlWC.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231456129918308412/FFVII_Chocobo_in_Battle-1.webp'
+    ]
+
+    var seaAngelImages = [
+
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231450129412784138/fc5617611b5f476ba7c8ba2f33a3d086.jpeg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231450166440099943/m-android.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231450222983516180/Luminescent-Sea-Angels-i.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231450366982230036/look_may.jpg',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231450474612265021/image.png',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231450532019965993/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2dldHR5aW1hZ2VzLTE0NzEyNTk0MzUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoiMTIwMCJ9fX0.webp',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231451056156704798/tumblr_474531bec6af1a4a58814d5742a1b393_a83b5f63_400-ezgif.com-webp-to-gif-converter.gif',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231451343894483046/tumblr_c26c5f3f232e0da33ccf99047ea6ce3e_5933aa84_500.gif',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231451358784389180/tumblr_2588010105840b62f7b8c34e6460c6dc_d661a396_500.gif',
+        'https://cdn.discordapp.com/attachments/693513623787536384/1231451905012535428/396c8a8d19927d7c2fa6e506ba8dd015.gif'
+    ]
+
     module.exports = {
         jerboaImages,
         caracalImages,
         hyenaImages,
         hogImages,
         foxImages,
+        birdImages,
+        seaAngelImages
       };
