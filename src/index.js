@@ -15,6 +15,8 @@ var waitingForSave = false;
 var controllingBot = false;
 const axios = require('axios');
 
+const keep_alive = require('./keep_alive.js')
+
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
